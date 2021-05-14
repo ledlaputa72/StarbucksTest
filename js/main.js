@@ -23,7 +23,6 @@ const badgeEl = document.querySelector("header .badges");
 window.addEventListener(
     "scroll",
     _.throttle(function () {
-        console.log(window.scrollY);
         if (window.scrollY > 500) {
             //배지를 숨긴다.
             // gsap.to(요소, 지속시간(초단위), 옵션{객체});
@@ -79,14 +78,19 @@ new Swiper(".promotion .swiper-container", {
 //toggle-promotion js
 const promotionEl = document.querySelector(".promotion");
 const promotionToggleBtn = document.querySelector(".toggle-promotion");
+
 let isHidePromotion = false;
 promotionToggleBtn.addEventListener("click", function () {
     isHidePromotion = !isHidePromotion;
     if (isHidePromotion) {
         //숨김 처리!
         promotionEl.classList.add("hide");
+        promotionToggleBtn.innerHTML =
+            '<div class="material-icons upload">download</div>';
     } else {
         //보임 처리!
         promotionEl.classList.remove("hide");
+        promotionToggleBtn.innerHTML =
+            '<div class="material-icons upload">upload</div>';
     }
 });
