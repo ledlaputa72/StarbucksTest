@@ -18,6 +18,7 @@ searchInputEl.addEventListener("blur", function () {
 
 // 뱃지 스크롤 이벤트 (사라지기)
 const badgeEl = document.querySelector("header .badges");
+const toTopEl = document.querySelector("#to-top");
 
 // _.throttle(함수, 시간) 화면을 스크롤할때 시간 딜레이로 작동된다.
 window.addEventListener(
@@ -30,15 +31,32 @@ window.addEventListener(
                 opacity: 0,
                 display: "none",
             });
+            //버튼 보이기
+            //버튼을 숨기기 CSS 선택자로도 선택이 가능하다.
+            // gsap.to("#to-top", 0.2, {
+            gsap.to(toTopEl, 0.2, {
+                x: 0,
+            });
         } else {
             //배지를 보인다.
             gsap.to(badgeEl, 0.6, {
                 opacity: 1,
                 display: "block",
             });
+            //버튼을 숨기기 CSS 선택자로도 선택이 가능하다.
+            // gsap.to("#to-top", 0.2, {
+            gsap.to(toTopEl, 0.2, {
+                x: 100,
+            });
         }
     }, 300)
 );
+
+toTopEl.addEventListener("click", function () {
+    gsap.to(window, 0.7, {
+        scrollTo: 0,
+    });
+});
 
 //visual section 요소 페이드 인 처리
 const fadeEls = document.querySelectorAll(".visual .fade-in");
@@ -147,4 +165,6 @@ spyEls.forEach(function (spyEl) {
         .addTo(new ScrollMagic.Controller()); // 컨트롤러에 장면을 할당(필수!)
 });
 
-//scroll에 따른 애니메이션 asap
+//연도 자동 계산
+const thisYear = document.querySelector(".this-year");
+thisYear.textContent = new Date().getFullYear();
